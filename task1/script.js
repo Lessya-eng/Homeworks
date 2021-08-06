@@ -49,13 +49,20 @@ let arr = [
     }
 ]
 //Задача №1
+/* let arr: string = users //Для Typescript
+.map
+.join(", ")
+let (name: {first_name: first}) = user;
+first + user.name.first_name_1
+user?.name? - проверка на наличие значения в поле */
+
 let fio = arr.map(user => ({
     fullName: `${user.first_name} ${user.last_name}`
 }));
 let fName = fio.map(users => `${Object.values(users)}`).join(", ")
 console.log(fName)
 
-//Задача №2
+//Задача №2 Дестуктуризация полей code style
 let getAge = {
     average: arr.reduce((aver, user) => aver + user.age, 0) / arr.length,
     age30: arr.filter(a => a.age > 30).length,
@@ -63,7 +70,7 @@ let getAge = {
     age18: arr.filter(a => a.age > 18).length,
 }
 console.log(getAge)
-
+//нельзя пушить в аккумулятор, reduce - всегда const  не пушим и не изменяем,это концепция, это функциональщина
 //Задача №3
 let getUser = arr.map(person => ({
     personId: person.id,
@@ -87,15 +94,8 @@ console.log(youngUser)
 /* console.log(youngResult) */
 
 //Задача №6
-let lastN = {};//map.set(key, value) – записывает по ключу key значение value.
-let key = arr.map(word => word.last_name).join('').replace(/[^A-Z]/g, ' ').split('').filter(function (entry) { return entry.trim() != ''; }).sort((a, b) => a > b ? 1 : -1);
-let keySet = new Set(key);
-let val = arr.map(value => value.last_name).sort((a, b) => a > b ? 1 : -1);
 
 
-
-console.log(keySet)
-console.log(val)
 
 
 
