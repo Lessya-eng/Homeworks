@@ -84,10 +84,18 @@ let youngUser = arr.filter(a => a.age < 40).sort((a, b) => a.age > b.age ? 1 : -
     yUser: `${young.first_name} ${young.last_name}`
 })) */
 console.log(youngUser)
-console.log(youngResult)
+/* console.log(youngResult) */
 
 //Задача №6
-let lastN = {}
-let key = arr.map(word => word[last_name])
-console.log(key)
+let lastN = {};//map.set(key, value) – записывает по ключу key значение value.
+let key = arr.map(word => word.last_name).join('').replace(/[^A-Z]/g, ' ').split('').filter(function (entry) { return entry.trim() != ''; }).sort((a, b) => a > b ? 1 : -1);
+let keySet = new Set(key);
+let val = arr.map(value => value.last_name).sort((a, b) => a > b ? 1 : -1);
+
+
+
+console.log(keySet)
+console.log(val)
+
+
 
