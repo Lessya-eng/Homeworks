@@ -31,7 +31,6 @@ const arr = [
         plot: "Harry, Ron, and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts.",
         country: "United Kingdom, United States",
         poster: "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
-
         imdbRating: 8.1,
         imdbVotes: 790377,
         type: "movie",
@@ -94,6 +93,50 @@ const arr = [
     }
 ]
 
+//Задача 1 
+//1. Собрать в массив все жанры фильмов (без повторения)
+const genre = arr.map(function (a) { return a.genre; }).join(',').split(',');
+const genreArr = Array.from(new Set(genre));
+console.log(genreArr)
 
+//Задача 2
+//Собрать в массив всех актеров всех фильмов (без повторения)
+const actor = arr.map(function (a) { return a.actors }).join(',').split(',');
+const actorArr = Array.from(new Set(actor));
+console.log(actorArr)
 
+//Задача 3 
+//Отсортировать фильмы по рейтингу по убыванию
+const sortFilm = arr.sort((a, b) => a.imdbRating < b.imdbRating ? 1 : -1)
+console.log(sortFilm);
 
+//Задача 4
+//Создать новый массив, где объекты фильмов будут состоять из следующих полей: id, title, released, plot
+const array = arr.map(({ id, title, released, plot }) => ({ id, title, released, plot }))
+console.log(array);
+
+//Задача 6
+//Создать массив авторов (поле writer) без повторений.
+const writer = arr.map(function (a) { return a.writer }).join(',').replace(/\s*,\s*/g, ",").split(',')
+const writerArr = Array.from(new Set(writer));
+console.log(writerArr)
+
+//Задача 7
+//Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый
+//отфильтрованный массив, с фильмами, где строка входит в название фильма.
+
+//Задача 8
+//Создать функцию, которая бы принимала массив фильмов и число. А результатом этой функции должен быть отфильтрованный массив, 
+//с фильмами где число равно году выхода фильма.
+
+function getFilm(arr, num) {
+
+}
+//Задача 9
+//Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть отфильтрованный массив,
+//с фильмами где строка входит в название фильма или в его сюжет.
+
+//Задача 10
+//Создать функцию, которая бы принимала 3 параметра:  1)массив фильмов , 2) строка(название поля, например 'title') и строку/число(значение поля "Black Widow"). А результатом этой функции должен быть отфильтрованный массив, где параметры 2 и 3 равны в объекте фильма. 
+/* Например: передаем `(films, 'title', 'Black Widow')` и на выходе получаем фильм с id=1
+если передаем `(films, 'year', 2011)` , то получаем фильм с id=2 */
