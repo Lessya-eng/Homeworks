@@ -116,6 +116,18 @@ console.log(sortFilm);
 const array = arr.map(({ id, title, released, plot }) => ({ id, title, released, plot }))
 console.log(array);
 
+//Задача 5 
+//Создать объект, где ключ это имя актера, а значение - массив из фильмов с его участием
+const filmObj = arr.reduce((actors, film) =>
+    film.actors.reduce((acc, actor) => {
+        if (!acc[actor]) {
+            return { ...acc, [actor]: [film] };
+        }
+        return { ...acc, [actor]: [...acc[actor], film] };
+    }, actors), {});
+console.log({ filmObj });
+
+
 //Задача 6
 //Создать массив авторов (поле writer) без повторений.
 const writer = arr.map(function (a) { return a.writer }).join(',').replace(/\s*,\s*/g, ",").split(',')
@@ -138,7 +150,7 @@ function getDate(arr, num) {
 }
 console.log(getDate(arr, 2001));
 
-//Задача 9
+//Задача 9 toLowerCase
 //Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть отфильтрованный массив,с фильмами где строка входит в название фильма или в его сюжет.
 function getFilm(arr, str) {
     const films = arr.filter(item => item.title.includes(str) || item.plot.includes(str))
@@ -150,7 +162,9 @@ console.log(getFilm(arr, "school"));
 //Создать функцию, которая бы принимала 3 параметра:  1)массив фильмов , 2) строка(название поля, например 'title') и строку/число(значение поля "Black Widow"). А результатом этой функции должен быть отфильтрованный массив, где параметры 2 и 3 равны в объекте фильма. 
 /* Например: передаем `(films, 'title', 'Black Widow')` и на выходе получаем фильм с id=1
 если передаем `(films, 'year', 2011)` , то получаем фильм с id=2 */
-function getAttribute(arr, key, value) {
-    const attribute = 
+/* function getAttribute(arr, key, value) {
+    const attribute =
 }
 console.log(getAttribute(arr, 'title', 'Black Widow'));
+ */
+//Попробовать через filter

@@ -99,6 +99,12 @@ console.log(youngResult)
        y: ['Yasenko'],
        f: ['Felton', 'Ford', 'Ferdinand'
     }` */
+const transformObj = arr.reduce((acc, { last_name }) => {
+    const key = last_name[0].toLowerCase()
+    if (acc.hasOwnProperty(key)) return { ...acc, [key]: [...acc[key], last_name], }
+    return { ...acc, [key]: [last_name] }
+}, {})
+console.log(transformObj);
 
 
 
