@@ -100,21 +100,38 @@ const genre = arr.map(function (a) { return a.genre; }).join(',').split(',');
 const genreArr = Array.from(new Set(genre));
 console.log(genreArr)
 
+/* const genres = arr.reduce((arr, { genre }) => {
+    return Array.from(new Set([...arr, ...genre]));
+}, []); */
+
+
 //Задача 2
 //Собрать в массив всех актеров всех фильмов (без повторения)
 const actor = arr.map(function (a) { return a.actors }).join(',').split(',');
 const actorArr = Array.from(new Set(actor));
 console.log(actorArr)
 
+/* const actors = arr.reduce((arr, { actors }) => {
+    return Array.from(new Set([...arr, ...actors]));
+}, []); */
+
+
 //Задача 3 
 //Отсортировать фильмы по рейтингу по убыванию
 const sortFilm = arr.sort((a, b) => a.imdbRating < b.imdbRating ? 1 : -1)
 console.log(sortFilm);
 
+/* const sortFilm = arr.sort((a, b) => b.imdbRating - a.imdbRating); */
+
+
 //Задача 4
 //Создать новый массив, где объекты фильмов будут состоять из следующих полей: id, title, released, plot
 const array = arr.map(({ id, title, released, plot }) => ({ id, title, released, plot }))
 console.log(array);
+
+/* const array = arr.map({ id, title, released, plot } =>
+{ id, title, released, plot }); */
+
 
 //Задача 5 
 //Создать объект, где ключ это имя актера, а значение - массив из фильмов с его участием
@@ -127,12 +144,27 @@ const filmObj = arr.reduce((actors, film) =>
     }, actors), {});
 console.log({ filmObj });
 
+/* const filmObj = arr.reduce(
+    (accum, film) =>
+        film.actors.reduce((acc, actor) => {
+            if (!acc[actor]) {
+                return { ...acc, [actor]: [film] }
+            }
+            return { ...acc, [actor]: [...acc[actor], film] }
+        }, accum),
+
+    {}
+) */
+
 
 //Задача 6
 //Создать массив авторов (поле writer) без повторений.
 const writer = arr.map(function (a) { return a.writer }).join(',').replace(/\s*,\s*/g, ",").split(',')
 const writerArr = Array.from(new Set(writer));
 console.log(writerArr)
+
+/* const writers = [...new Set(arr.map((u) => u.writer))]; */
+
 
 //Задача 7
 //Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый отфильтрованный массив, с фильмами, где строка входит в название фильма.
@@ -142,6 +174,10 @@ function getFilms(arr, str) {
 }
 console.log(getFilms(arr, "Harry"));
 
+/* const getMoviesBySubstring = (films, substring) =>
+    arr.filter(({ title }) => title.toLowerCase().includes(substring.toLowerCase()); */
+
+
 //Задача 8
 //Создать функцию, которая бы принимала массив фильмов и число. А результатом этой функции должен быть отфильтрованный массив, с фильмами где число равно году выхода фильма.
 function getDate(arr, num) {
@@ -150,6 +186,9 @@ function getDate(arr, num) {
 }
 console.log(getDate(arr, 2001));
 
+/* const getDate = (films, year) => arr.filter(({ year }) => year); */
+
+
 //Задача 9 toLowerCase
 //Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть отфильтрованный массив,с фильмами где строка входит в название фильма или в его сюжет.
 function getFilm(arr, str) {
@@ -157,6 +196,14 @@ function getFilm(arr, str) {
     return films
 }
 console.log(getFilm(arr, "school"));
+
+/* const searchMovies = (mass, str) => {
+    const substring = str.toLowerCase();
+    return films.filter(({ title, plot }) =>
+        title.toLowerCase().includes(substring) || plot.toLowerCase().includes(substring);
+
+} */
+
 
 //Задача 10
 //Создать функцию, которая бы принимала 3 параметра:  1)массив фильмов , 2) строка(название поля, например 'title') и строку/число(значение поля "Black Widow"). А результатом этой функции должен быть отфильтрованный массив, где параметры 2 и 3 равны в объекте фильма. 
@@ -167,4 +214,10 @@ console.log(getFilm(arr, "school"));
 }
 console.log(getAttribute(arr, 'title', 'Black Widow'));
  */
-//Попробовать через filter
+const getFilterMoviesByField = (films, field, value) => {
+    return arr.reduce((acc, film) => {
+        return film[field] === value || film[field].includes(value)
+            ? [...acc, film]
+            : acc;
+    }, []);
+};

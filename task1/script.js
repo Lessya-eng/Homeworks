@@ -56,6 +56,11 @@ let fio = arr.map(user => ({
 let fName = fio.map(users => `${Object.values(users)}`).join(", ")
 console.log(fName)
 
+/* const fio = arr
+    .map(({ first_name, last_name }) => `${first_name} ${last_name}`)
+    .join(", "); */
+
+
 //Задача №2 
 //Получить объект, где были бы **a)** данные о среднем возрасте пользователей, **b)** количество пользователей старше **30, c)** количество пользователей старше 40**,  d)** количество пользователей старше 18 ****
 let getAge = {
@@ -66,6 +71,30 @@ let getAge = {
 }
 console.log(getAge)
 
+/* 
+const getAge = arr.reduce(
+    ({ averageAge, olderThen30, olderThen40, olderThen18 }, { age }, index) => {
+        const { length: userLength } = users;
+        const isLastUser = index + 1 === userLength;
+
+        return {
+            averageAge: isLastUser
+                ? (averageAge + age) / userLength
+                : averageAge + age,
+            olderThen30: age > 30 ? olderThen30 + 1 : olderThen30,
+            olderThen40: age > 40 ? olderThen40 + 1 : olderThen40,
+            olderThen18: age > 18 ? olderThen18 + 1 : olderThen18,
+        };
+    },
+    {
+        averageAge: 0,
+        olderThen30: 0,
+        olderThen40: 0,
+        olderThen18: 0,
+    }
+); */
+
+
 //Задача №3
 //Создать новый массив пользователей, где объект пользователя должен содержать только id  и поле, отвечающее за имя пользователя, которое должно содержать имя и фамилию.
 let getUser = arr.map(person => ({
@@ -73,6 +102,12 @@ let getUser = arr.map(person => ({
     personF: `${person.first_name} ${person.last_name}`,
 }))
 console.log(getUser)
+
+/* const getUser = arr.map(({ id, first_name, last_name }) => ({
+    id,
+    name: `${first_name} ${last_name}`,
+})); */
+
 
 //Задача №4 
 //Создать массив из emails по алфавиту.
@@ -82,6 +117,9 @@ let result = Object.values(emailArr).map(em => ({
 }))
 console.log(result)
 
+/* const result = arr.map(({ email }) => email).sort(); */
+
+
 //Задача №5
 //Создать массив юзеров, где они отсортированы по возрасту по возрастанию и все пользователи младше 40 лет.
 let youngUser = arr.filter(a => a.age < 40).sort((a, b) => a.age > b.age ? 1 : -1)
@@ -90,6 +128,10 @@ let youngResult = Object.values(youngUser).map(young => ({
 }))
 console.log(youngUser)
 console.log(youngResult)
+
+/* const arr = arr
+    .filter((user) => user.age < 40)
+    .sort((a, b) => a.age - b.age); */
 
 //Задача №6
 /* Создать объект, где ключ, это первая буква фамилии, а значение - массив из фамилий пользователей начинающихся на эту букву. Объект должен состоять только из ключей существующих фамилий в этом массиве. Например в этом массиве нет фамилии с букву **Y,** а значит и такого поля не должно быть в объекте.
@@ -106,7 +148,18 @@ const transformObj = arr.reduce((acc, { last_name }) => {
 }, {})
 console.log(transformObj);
 
+/* const transformObj = arr.reduce((acc, { last_name }) => {
+    const firstLetterLastName = last_name[0].toLowerCase();
 
+    if (acc.hasOwnProperty(firstLetterLastName)) {
+        return {
+            ...acc,
+            [firstLetterLastName]: [...acc[firstLetterLastName], last_name],
+        };
+    }
+    return { ...acc, [firstLetterLastName]: [last_name] };
+}, {});
+ */
 
 
 
