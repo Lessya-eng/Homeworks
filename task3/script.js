@@ -138,7 +138,18 @@ console.log(filterByIdProduct(arrayMac, [1, 4, 6]));
 //10. Создать функцию, которая принимает массив продуктов и массив айдишников, и возвращает объект,
 // c общими суммами цен продуктов(у которых айдишники совпадают) по каждой валюте.
 //Например: `{ euro: 20, usd: 6}`
+const totalPrice = (foodarr, foodId) => {
+    let arrById = foodarr.filter((item) => foodId.includes(item.id));
+    let sumEuro = arrById
+        .map((item) => (item.currency === "euro" ? item.price : 0))
+        .reduce((a, b) => a + b);
+    let sumUsd = arrById
+        .map((item) => (item.currency === "usd" ? item.price : 0))
+        .reduce((a, b) => a + b);
+    return { euro: sumEuro, usd: sumUsd };
+};
 
+console.log(totalPrice(arrayMac, [1, 3, 4]));
 
 //11. Создать функцию, которая принимает массив продуктов и массив айдишников, и строку, где число равно сумме
 //цен продуктов + значок валюты. При этом если, у нас попадают продукты с разными валютами, то мы должны получить сумму в евро и перевести доллары в евро(использовать для этого курс евро/доллар).
